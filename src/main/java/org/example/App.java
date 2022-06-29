@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.Author;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

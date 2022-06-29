@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model.Author;
+import org.example.model.Car;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
