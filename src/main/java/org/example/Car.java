@@ -1,9 +1,17 @@
 package org.example;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "SAMOCHOD")
+@Getter
+@Setter
+@NoArgsConstructor// <- konstruktor bezargumentowy
+//@AllArgsConstructor // <- kontruktor ze wszystkimi polami
+//@RequiredArgsConstructor // <- konstruktor tylko dla pol final
+@ToString
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,36 +20,4 @@ public class Car {
     private String brand;
     @Column(name = "MAX_SPEED")
     private Integer maxSpeed;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public Integer getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void setMaxSpeed(Integer maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
 }
