@@ -1,7 +1,9 @@
 package org.example;
 
 import org.example.model.Author;
+import org.example.model.Car;
 import org.example.repository.AuthorRepository;
+import org.example.repository.CarRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,5 +20,13 @@ public class App
 
         AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
         authorRepository.save(author);
+        CarRepository carRepository = new CarRepository(sessionFactory);
+        Car car = new Car();
+        car.setBrand("fiat");
+        car.setName("multipla");
+        car.setMaxSpeed(70);
+        carRepository.save(car);
+//        carRepository.find()
+//        car.getId(); // <- id ktore wpisal hibernate
     }
 }
