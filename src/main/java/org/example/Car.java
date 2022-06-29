@@ -1,14 +1,16 @@
 package org.example;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "SAMOCHOD")
 public class Car {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String brand;
+    @Column(name = "MAX_SPEED")
     private Integer maxSpeed;
 
     public Integer getId() {
