@@ -20,6 +20,9 @@ public class App
 
         AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
         authorRepository.save(author);
+        Author authorFromDb = authorRepository.find(author.getId());
+        System.out.println("AUTHOR FROM DB: " + authorFromDb);
+
         CarRepository carRepository = new CarRepository(sessionFactory);
         Car car = new Car();
         car.setBrand("fiat");

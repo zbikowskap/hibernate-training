@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class AuthorRepository {
     private SessionFactory sessionFactory;
@@ -16,6 +18,13 @@ public class AuthorRepository {
         session.persist(author);
         transaction.commit();
         session.close();
+    }
+
+    public Author find(Integer id){
+        Session session = sessionFactory.openSession();
+        Author author = session.find(Author.class, id);
+        session.close();
+        return author;
     }
 
 

@@ -15,7 +15,6 @@ public class CarRepository {
         Transaction transaction = session.beginTransaction();
         session.persist(car);
         transaction.commit();
-        //TODO close :)
-        sessionFactory.close();
+        session.close();
     }
 }

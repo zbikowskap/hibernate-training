@@ -1,6 +1,7 @@
 package org.example.model;
 
 import lombok.AllArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@ToString
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
