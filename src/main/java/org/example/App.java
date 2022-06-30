@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Optional;
+
 public class App
 {
     public static void main( String[] args ) {
@@ -20,8 +22,25 @@ public class App
 
         AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
         authorRepository.save(author);
-        Author authorFromDb = authorRepository.find(author.getId());
-        System.out.println("AUTHOR FROM DB: " + authorFromDb);
+//        Author authorFromDb = authorRepository.find(author.getId());
+//        System.out.println("AUTHOR FROM DB: " + authorFromDb);
+
+        //OPTIONAL V1
+        authorRepository.find(author.getId())
+                .ifPresent(authorFromDb -> System.out.println("AUTHOR FROM DB: " + authorFromDb));
+
+        //OPTIONAL V2
+        Optional<Author> optionalAuthorFromDb = authorRepository.find(author.getId());
+        if(optionalAuthorFromDb.isPresent()){
+            Author authorFromDb = optionalAuthorFromDb.get();
+            System.out.println("AUTHOR FROM DB: " + authorFromDb);
+        }
+
+        author.setLastName("Edamski");
+        authorRepository.update(author);
+
+        authorRepository.find(author.getId())
+                .ifPresent(authorFromDb -> System.out.println("AUTHOR FROM DB: " + authorFromDb));
 
         CarRepository carRepository = new CarRepository(sessionFactory);
         Car car = new Car();
