@@ -24,4 +24,12 @@ public class CarRepository {
         session.close();
         return car;
     }
+
+    public void update(Car car){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(car);
+        transaction.commit();
+        session.close();
+    }
 }

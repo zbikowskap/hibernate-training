@@ -37,6 +37,15 @@ public class AuthorRepository {
         session.close();
     }
 
+    public void delete(Integer id){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+//        find(id).ifPresent(author -> session.remove(author));
+        find(id).ifPresent(session::remove);
+        transaction.commit();
+        session.close();
+    }
+
 //    public void find(...)
 //    public void update(...)
 }

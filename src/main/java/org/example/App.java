@@ -42,6 +42,15 @@ public class App
         authorRepository.find(author.getId())
                 .ifPresent(authorFromDb -> System.out.println("AUTHOR FROM DB: " + authorFromDb));
 
+        authorRepository.delete(author.getId());
+        Optional<Author> authorAfterDelete = authorRepository.find(author.getId());
+        if(authorAfterDelete.isPresent()){
+            System.out.println("NIE USUNALEM AUTORA");
+        } else {
+            System.out.println("USUWANIE SIE UDALO !");
+        }
+
+
         CarRepository carRepository = new CarRepository(sessionFactory);
         Car car = new Car();
         car.setBrand("fiat");
@@ -50,5 +59,8 @@ public class App
         carRepository.save(car);
         Car carFromDb = carRepository.find(car.getId());
         System.out.println("CAR FROM DB: " + carFromDb);
+
+        //update
+        System.out.println("CAR AFTER UPDATE: " + carRepository.find(car.getId()));
     }
 }
