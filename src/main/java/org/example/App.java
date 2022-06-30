@@ -4,6 +4,7 @@ import org.example.model.Author;
 import org.example.model.Car;
 import org.example.repository.AuthorRepository;
 import org.example.repository.CarRepository;
+import org.example.repository.NewAuthorRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -65,5 +66,10 @@ public class App
 
         carRepository.delete(9999);
         System.out.println("CAR PO USUNIECIU: " + carRepository.find(car.getId()));
+
+
+        NewAuthorRepository newAuthorRepository = new NewAuthorRepository(sessionFactory);
+        
+
     }
 }
