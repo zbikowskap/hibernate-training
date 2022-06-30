@@ -29,7 +29,7 @@ public class App
         car.setName("multipla");
         car.setMaxSpeed(70);
         carRepository.save(car);
-//        carRepository.find()
-//        car.getId(); // <- id ktore wpisal hibernate
+        Car carFromDb = carRepository.find(car.getId());
+        System.out.println("CAR FROM DB: " + carFromDb);
     }
 }

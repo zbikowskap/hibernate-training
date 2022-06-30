@@ -17,4 +17,11 @@ public class CarRepository {
         transaction.commit();
         session.close();
     }
+
+    public Car find(Integer id){
+        Session session = sessionFactory.openSession();
+        Car car = session.find(Car.class, id);
+        session.close();
+        return car;
+    }
 }
