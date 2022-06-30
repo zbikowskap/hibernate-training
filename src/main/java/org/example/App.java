@@ -62,5 +62,8 @@ public class App
 
         //update
         System.out.println("CAR AFTER UPDATE: " + carRepository.find(car.getId()));
+
+        carRepository.delete(9999);
+        System.out.println("CAR PO USUNIECIU: " + carRepository.find(car.getId()));
     }
 }

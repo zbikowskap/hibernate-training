@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import com.sun.xml.fastinfoset.util.StringArray;
 import lombok.AllArgsConstructor;
 import org.example.model.Car;
 import org.hibernate.Session;
@@ -29,6 +30,18 @@ public class CarRepository {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(car);
+        transaction.commit();
+        session.close();
+    }
+
+    public void delete(Integer id){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Car car = find(id);
+        //Car car = session.find(Car.class, id);
+        if (car != null) {
+            session.remove(car);
+        }
         transaction.commit();
         session.close();
     }
