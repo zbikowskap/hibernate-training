@@ -22,6 +22,7 @@ public class Car {
     @Column(name = "MAX_SPEED")
     private Integer maxSpeed;
     @OneToOne
+    @JoinColumn(name = "OWNER_ID")
     private Owner ownerrrrrrrr;
     @ManyToMany(mappedBy = "cars")
     private Set<Sticker> stickers;
