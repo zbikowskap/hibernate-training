@@ -2,9 +2,7 @@ package org.example;
 
 import org.example.model.Author;
 import org.example.model.Car;
-import org.example.repository.AuthorRepository;
-import org.example.repository.CarRepository;
-import org.example.repository.NewAuthorRepository;
+import org.example.repository.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,7 +19,7 @@ public class App
         author.setLastName("Adamski");
         author.setAddress("Gdansk");
 
-        AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
+        NewAuthorRepository authorRepository = new NewAuthorRepository(sessionFactory);
         authorRepository.save(author);
 //        Author authorFromDb = authorRepository.find(author.getId());
 //        System.out.println("AUTHOR FROM DB: " + authorFromDb);
@@ -43,7 +41,7 @@ public class App
         authorRepository.find(author.getId())
                 .ifPresent(authorFromDb -> System.out.println("AUTHOR FROM DB: " + authorFromDb));
 
-        authorRepository.delete(author.getId());
+//        authorRepository.delete(author.getId());
         Optional<Author> authorAfterDelete = authorRepository.find(author.getId());
         if(authorAfterDelete.isPresent()){
             System.out.println("NIE USUNALEM AUTORA");
@@ -52,24 +50,22 @@ public class App
         }
 
 
-        CarRepository carRepository = new CarRepository(sessionFactory);
+        NewCarRepository carRepository = new NewCarRepository(sessionFactory);
         Car car = new Car();
         car.setBrand("fiat");
         car.setName("multipla");
         car.setMaxSpeed(70);
         carRepository.save(car);
-        Car carFromDb = carRepository.find(car.getId());
-        System.out.println("CAR FROM DB: " + carFromDb);
+        Optional<Car> carFromDb = carRepository.find(car.getId());
+        System.out.println("CAR FROM DB: " + carFromDb.get());
 
         //update
         System.out.println("CAR AFTER UPDATE: " + carRepository.find(car.getId()));
 
-        carRepository.delete(9999);
+//        carRepository.delete(9999);
         System.out.println("CAR PO USUNIECIU: " + carRepository.find(car.getId()));
 
 
         NewAuthorRepository newAuthorRepository = new NewAuthorRepository(sessionFactory);
-        
-
     }
 }
