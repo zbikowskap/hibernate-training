@@ -10,6 +10,8 @@ import org.example.repository.OwnerRepository;
 import org.example.repository.StickerRepository;
 import org.hibernate.SessionFactory;
 
+import java.util.Set;
+
 public class RelationApp {
     public static void main(String[] args) {
         SessionFactory sessionFactory = new HibernateFactory().getSessionFactory();
@@ -19,10 +21,12 @@ public class RelationApp {
         AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
 
         Owner michal = createOwner();
-        Car fiatMultipla = createCar(michal);
+        Car fiatMultipla = createFiat(michal, "multipla");
+        Car fiatPanda = createFiat(null, "panda");
 
         ownerRepository.save(michal);
         carRepository.save(fiatMultipla);
+        carRepository.save(fiatPanda);
 
         System.out.println("ZNALEZIONY OWNER!!");
         ownerRepository.find(michal.getId()).ifPresent(System.out::println);
@@ -30,20 +34,23 @@ public class RelationApp {
         carRepository.find(fiatMultipla.getId()).ifPresent(System.out::println);
 
         Author author = createAuthor();
-        Sticker sticker = createSticker(author, "flames");
-        Sticker fireAndFlames = createSticker(author, "fire and flames");
+        Sticker sticker = createSticker(Set.of(fiatMultipla), author, "flames");
+        Sticker fireAndFlames = createSticker(Set.of(fiatMultipla, fiatPanda), author, "fire and flames");
 
         authorRepository.save(author);
         stickerRepository.save(sticker);
         stickerRepository.save(fireAndFlames);
+
+        //najpierw car, potem sticker
     }
 
-    private static Sticker createSticker(Author author, String name) {
+    private static Sticker createSticker(Set<Car> cars, Author author, String name) {
         Sticker sticker = new Sticker();
         sticker.setName(name);
         sticker.setWidth(20.5F);
         sticker.setHeight(10.2F);
         sticker.setAuthor(author);
+        sticker.setCars(cars);
         return sticker;
     }
 
@@ -55,9 +62,9 @@ public class RelationApp {
         return author;
     }
 
-    private static Car createCar(Owner michal) {
+    private static Car createFiat(Owner michal, String name) {
         Car fiatMultipla = new Car();
-        fiatMultipla.setName("multipla");
+        fiatMultipla.setName(name);
         fiatMultipla.setBrand("fiat");
         fiatMultipla.setMaxSpeed(120);
         fiatMultipla.setOwnerrrrrrrr(michal);

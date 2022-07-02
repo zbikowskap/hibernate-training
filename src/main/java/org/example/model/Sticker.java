@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,4 +22,6 @@ public class Sticker {
     private Float height;
     @ManyToOne
     private Author author;
+    @ManyToMany
+    private Set<Car> cars;
 }

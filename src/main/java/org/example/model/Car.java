@@ -3,6 +3,7 @@ package org.example.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "SAMOCHOD")
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor// <- konstruktor bezargumentowy
 //@AllArgsConstructor // <- kontruktor ze wszystkimi polami
 //@RequiredArgsConstructor // <- konstruktor tylko dla pol final
-@ToString(exclude = "ownerrrrrrrr")
+@ToString(exclude = {"ownerrrrrrrr", "stickers"})
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +23,6 @@ public class Car {
     private Integer maxSpeed;
     @OneToOne
     private Owner ownerrrrrrrr;
+    @ManyToMany(mappedBy = "cars")
+    private Set<Sticker> stickers;
 }
