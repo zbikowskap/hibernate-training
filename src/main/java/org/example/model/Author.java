@@ -3,10 +3,8 @@ package org.example.model;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @ToString
@@ -17,6 +15,8 @@ public class Author {
     private String firstName;
     private String lastName;
     private String address;
+    @OneToMany(mappedBy = "author")
+    private Set<Sticker> stickers;
 
     public Integer getId() {
         return id;

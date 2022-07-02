@@ -3,6 +3,7 @@ package org.example;
 import org.example.model.Author;
 import org.example.model.Car;
 import org.example.model.Owner;
+import org.example.model.Sticker;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -22,6 +23,7 @@ public class HibernateFactory {
 		configuration.addAnnotatedClass(Car.class);
 		configuration.addAnnotatedClass(Author.class);
 		configuration.addAnnotatedClass(Owner.class);
+		configuration.addAnnotatedClass(Sticker.class);
 
 		return configuration;
 	}
