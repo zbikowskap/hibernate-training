@@ -3,9 +3,7 @@ package org.example;
 import org.example.model.Author;
 import org.example.model.Car;
 import org.example.repository.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.Optional;
 
@@ -19,7 +17,7 @@ public class App
         author.setLastName("Adamski");
         author.setAddress("Gdansk");
 
-        NewAuthorRepository authorRepository = new NewAuthorRepository(sessionFactory);
+        AuthorRepository authorRepository = new AuthorRepository(sessionFactory);
         authorRepository.save(author);
 //        Author authorFromDb = authorRepository.find(author.getId());
 //        System.out.println("AUTHOR FROM DB: " + authorFromDb);
@@ -50,7 +48,7 @@ public class App
         }
 
 
-        NewCarRepository carRepository = new NewCarRepository(sessionFactory);
+        CarRepository carRepository = new CarRepository(sessionFactory);
         Car car = new Car();
         car.setBrand("fiat");
         car.setName("multipla");
@@ -66,6 +64,6 @@ public class App
         System.out.println("CAR PO USUNIECIU: " + carRepository.find(car.getId()));
 
 
-        NewAuthorRepository newAuthorRepository = new NewAuthorRepository(sessionFactory);
+        AuthorRepository newAuthorRepository = new AuthorRepository(sessionFactory);
     }
 }

@@ -1,39 +1,34 @@
 package org.example.repository;
 
+import lombok.AllArgsConstructor;
+import org.example.model.Car;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.Optional;
-
-public abstract class EntityRepository<T> {
+@AllArgsConstructor
+public class OldCarRepository {
     private SessionFactory sessionFactory;
-    private Class<T> clazz;
 
-    public EntityRepository(SessionFactory sessionFactory, Class<T> clazz) {
-        this.sessionFactory = sessionFactory;
-        this.clazz = clazz;
-    }
-
-    public void save(T entity){
+    public void save(Car car){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.persist(entity);
+        session.persist(car);
         transaction.commit();
         session.close();
     }
 
-    public Optional<T> find(Integer id){
+    public Car find(Integer id){
         Session session = sessionFactory.openSession();
-        T entity = session.find(clazz, id);
+        Car car = session.find(Car.class, id);
         session.close();
-        return Optional.ofNullable(entity);
+        return car;
     }
 
-    public void update(T entity){
+    public void update(Car car){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(entity);
+        session.update(car);
         transaction.commit();
         session.close();
     }
@@ -41,8 +36,11 @@ public abstract class EntityRepository<T> {
     public void delete(Integer id){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-//        find(id).ifPresent(author -> session.remove(author));
-        find(id).ifPresent(session::remove);
+        Car car = find(id);
+        //Car car = session.find(Car.class, id);
+        if (car != null) {
+            session.remove(car);
+        }
         transaction.commit();
         session.close();
     }

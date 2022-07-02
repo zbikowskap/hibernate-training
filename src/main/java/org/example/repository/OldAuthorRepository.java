@@ -1,39 +1,37 @@
 package org.example.repository;
 
+import lombok.AllArgsConstructor;
+import org.example.model.Author;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.Optional;
 
-public abstract class EntityRepository<T> {
+@AllArgsConstructor
+//CRUD <- create read update delete
+public class OldAuthorRepository {
     private SessionFactory sessionFactory;
-    private Class<T> clazz;
 
-    public EntityRepository(SessionFactory sessionFactory, Class<T> clazz) {
-        this.sessionFactory = sessionFactory;
-        this.clazz = clazz;
-    }
-
-    public void save(T entity){
+    public void save(Author author){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.persist(entity);
+        session.persist(author);
         transaction.commit();
         session.close();
     }
 
-    public Optional<T> find(Integer id){
+    public Optional<Author> find(Integer id){
         Session session = sessionFactory.openSession();
-        T entity = session.find(clazz, id);
+        Author author = session.find(Author.class, id);
         session.close();
-        return Optional.ofNullable(entity);
+        return Optional.ofNullable(author);
     }
 
-    public void update(T entity){
+    public void update(Author author){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(entity);
+        session.update(author);
         transaction.commit();
         session.close();
     }
@@ -46,4 +44,7 @@ public abstract class EntityRepository<T> {
         transaction.commit();
         session.close();
     }
+
+//    public void find(...)
+//    public void update(...)
 }
