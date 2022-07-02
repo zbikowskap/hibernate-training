@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor// <- konstruktor bezargumentowy
 //@AllArgsConstructor // <- kontruktor ze wszystkimi polami
 //@RequiredArgsConstructor // <- konstruktor tylko dla pol final
-@ToString
+@ToString(exclude = "ownerrrrrrrr")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,6 @@ public class Car {
     private String brand;
     @Column(name = "MAX_SPEED")
     private Integer maxSpeed;
+    @OneToOne
+    private Owner ownerrrrrrrr;
 }
