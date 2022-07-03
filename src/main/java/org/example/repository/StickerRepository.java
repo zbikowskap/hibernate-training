@@ -3,6 +3,7 @@ package org.example.repository;
 import org.example.model.Sticker;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -30,5 +31,16 @@ public class StickerRepository extends EntityRepository<Sticker>{
         List<Sticker> resultList = query.getResultList();
         session.close();
         return resultList;
+    }
+
+    public void managedContextExample(Sticker sticker){
+        Session session = getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(sticker);
+        //TO SIE ZAPISZE DO BAZY DANYCH !!!
+        sticker.setName("DUMMY VALUE");
+        sticker.setHeight(0.1F);
+        transaction.commit();
+        session.close();
     }
 }

@@ -75,6 +75,10 @@ public class RelationApp {
         System.out.println("DELETE CARS SLOWER THAN");
         carRepository.deleteCarsWithSpeedLowerThen(121);
         carRepository.findAll().forEach(System.out::println);
+
+        Sticker managedContextExample = createSticker(null, null, "managedContextExample");
+        stickerRepository.managedContextExample(managedContextExample);
+        stickerRepository.find(managedContextExample.getId()).ifPresent(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {
