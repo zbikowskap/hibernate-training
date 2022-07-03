@@ -74,6 +74,10 @@ public class RelationApp {
 
         System.out.println("GET AUTHORS BY NAME AND LASTNAME");
         authorRepository.getAuthorByFirstNameAndLastName("Adam", "Adamski").forEach(System.out::println);
+
+        System.out.println("DELETE CARS SLOWER THAN");
+        carRepository.deleteCarsWithSpeedLowerThen(121);
+        carRepository.findAll().forEach(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {
@@ -98,7 +102,7 @@ public class RelationApp {
         Car fiatMultipla = new Car();
         fiatMultipla.setName(name);
         fiatMultipla.setBrand("fiat");
-        fiatMultipla.setMaxSpeed(120);
+        fiatMultipla.setMaxSpeed(200);
         fiatMultipla.setOwnerrrrrrrr(michal);
         return fiatMultipla;
     }
