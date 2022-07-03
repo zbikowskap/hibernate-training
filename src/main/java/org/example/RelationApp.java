@@ -11,6 +11,7 @@ import org.example.repository.StickerRepository;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class RelationApp {
@@ -52,6 +53,12 @@ public class RelationApp {
         authorRepository.getAllWithStickers()
                 .forEach(System.out::println);
 
+        //to wyrzuci wyjatek -  Lazy initialization exception
+//        List<Author> allAuthors = authorRepository.getAll();
+//        for (Author author1 : allAuthors) {
+//            System.out.println("AUTHOR NAME: " + author1.getFirstName());
+//            System.out.println("AUTHOR STICKERS: " + author1.getStickers());
+//        }
 
     }
 
