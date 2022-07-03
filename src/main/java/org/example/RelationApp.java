@@ -79,6 +79,9 @@ public class RelationApp {
         Sticker managedContextExample = createSticker(null, null, "managedContextExample");
         stickerRepository.managedContextExample(managedContextExample);
         stickerRepository.find(managedContextExample.getId()).ifPresent(System.out::println);
+
+        System.out.println("ALL CARS USING CRITERIA QUERRY!!");
+        carRepository.getAllCarsWithCriteriaQuery().forEach(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {
