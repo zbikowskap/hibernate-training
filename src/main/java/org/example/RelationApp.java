@@ -65,6 +65,15 @@ public class RelationApp {
 
         System.out.println("GET OWNER LAST NAMES");
         ownerRepository.getLastName().forEach(System.out::println);
+
+        System.out.println("GET STICKERS BY NAME");
+        stickerRepository.getStickersByName("flames").forEach(System.out::println);
+
+        System.out.println("GET STICKERS BY NAME 2");
+        stickerRepository.getStickerByName2("flames").forEach(System.out::println);
+
+        System.out.println("GET AUTHORS BY NAME AND LASTNAME");
+        authorRepository.getAuthorByFirstNameAndLastName("Adam", "Adamski").forEach(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {

@@ -4,6 +4,7 @@ import org.example.model.Author;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class AuthorRepository extends EntityRepository<Author> {
         super(sessionFactory, Author.class);
     }
 
-    public List<Author> getAll(){
+    public List<Author> getAll() {
         Session session = getSessionFactory().openSession();
         List<Author> resultList = session.createQuery("From Author", Author.class)
                 .getResultList();
@@ -21,7 +22,7 @@ public class AuthorRepository extends EntityRepository<Author> {
         return resultList;
     }
 
-    public List<Author> getAllWithStickers(){
+    public List<Author> getAllWithStickers() {
         Session session = getSessionFactory().openSession();
         List<Author> resultList = session.createQuery("From Author", Author.class)
                 .getResultList();
@@ -32,4 +33,20 @@ public class AuthorRepository extends EntityRepository<Author> {
         return resultList;
     }
 
+    //SELECT * FROM AUTHOR WHERE FIRSTNAME = ? AND LASTNAME = ?
+    public List<Author> getAuthorByFirstNameAndLastName(String firstName, String lastName) {
+        Session session = getSessionFactory().openSession();
+        List<Author> resultList = session.createQuery(
+                        "From Author a Where a.firstName = :firstName And a.lastName = :lastName", Author.class)
+                .setParameter("firstName", firstName)
+                .setParameter("lastName", lastName)
+                .getResultList();
+
+        resultList.stream()
+                .map(Author::getStickers)
+                .forEach(Hibernate::initialize);
+
+        session.close();
+        return resultList;
+    }
 }
