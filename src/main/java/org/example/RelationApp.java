@@ -97,6 +97,7 @@ public class RelationApp {
         author.setLastName("Adamski");
         author.setAddress("Gdansk");
         author.setFullAddress(new Address("20-200", "blotna", "Gdansk"));
+        author.setPesel("82060335397");
         return author;
     }
 
