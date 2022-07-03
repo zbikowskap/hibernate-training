@@ -60,6 +60,11 @@ public class RelationApp {
 //            System.out.println("AUTHOR STICKERS: " + author1.getStickers());
 //        }
 
+        System.out.println("ALL MAX SPEEDS");
+        carRepository.getMaxSpeed().forEach(System.out::println);
+
+        System.out.println("GET OWNER LAST NAMES");
+        ownerRepository.getLastName().forEach(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {
