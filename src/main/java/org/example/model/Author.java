@@ -21,5 +21,6 @@ public class Author {
     private String address;
     @OneToMany(mappedBy = "author")
     private Set<Sticker> stickers;
-
+    @Embedded
+    private Address fullAddress;
 }

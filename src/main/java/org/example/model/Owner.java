@@ -20,4 +20,6 @@ public class Owner {
     private String lastName;
     @OneToOne(mappedBy = "ownerrrrrrrr")
     private Car car;
+    @Embedded
+    private Address fullAddress;
 }

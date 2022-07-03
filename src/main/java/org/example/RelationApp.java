@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.model.Author;
-import org.example.model.Car;
-import org.example.model.Owner;
-import org.example.model.Sticker;
+import org.example.model.*;
 import org.example.repository.AuthorRepository;
 import org.example.repository.CarRepository;
 import org.example.repository.OwnerRepository;
@@ -95,6 +92,7 @@ public class RelationApp {
         author.setFirstName("Adam");
         author.setLastName("Adamski");
         author.setAddress("Gdansk");
+        author.setFullAddress(new Address("20-200", "blotna", "Gdansk"));
         return author;
     }
 
