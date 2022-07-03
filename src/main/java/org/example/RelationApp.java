@@ -10,6 +10,7 @@ import org.example.repository.OwnerRepository;
 import org.example.repository.StickerRepository;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
 import java.util.Set;
 
 public class RelationApp {
@@ -41,7 +42,17 @@ public class RelationApp {
         stickerRepository.save(sticker);
         stickerRepository.save(fireAndFlames);
 
-        //najpierw car, potem sticker
+//        List<Author> all = authorRepository.getAll();
+//        for (Author a : all) {
+//            System.out.println(a);
+//        }
+//
+//        authorRepository.getAll().forEach(a -> System.out.println(a));
+        System.out.println("ALL AUTHORS !!!:");
+        authorRepository.getAllWithStickers()
+                .forEach(System.out::println);
+
+
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {

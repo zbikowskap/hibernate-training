@@ -46,4 +46,8 @@ public abstract class EntityRepository<T> {
         transaction.commit();
         session.close();
     }
+
+    protected SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }

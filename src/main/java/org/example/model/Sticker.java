@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"author", "cars"})
 public class Sticker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
