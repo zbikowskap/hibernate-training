@@ -88,6 +88,9 @@ public class RelationApp {
 
         System.out.println("ALL CARS SLOWER THAN");
         carRepository.getCarsSlowerThan(209).forEach(System.out::println);
+
+        System.out.println("AVERGE CARS SPEED:");
+        System.out.println("AVERGE: " + carRepository.getAverageCarSpeed());
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {

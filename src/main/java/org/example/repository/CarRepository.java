@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -47,6 +48,19 @@ public class CarRepository extends EntityRepository<Car> {
         List<Car> resultList = session.createQuery(query).getResultList();
         session.close();
         return resultList;
+    }
+
+    public Double getAverageCarSpeed(){
+        Session session = getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Double> query = cb.createQuery(Double.class);
+        Root<Car> root = query.from(Car.class);
+
+        query.select(cb.avg(root.get("maxSpeed")));
+
+        Double avg = session.createQuery(query).getSingleResult();
+        session.close();
+        return avg;
     }
 
     public void deleteCarsWithSpeedLowerThen(Integer speed) {
