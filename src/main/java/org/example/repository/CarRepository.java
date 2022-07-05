@@ -36,6 +36,19 @@ public class CarRepository extends EntityRepository<Car> {
         return resultList;
     }
 
+    public List<Car> getCarsSlowerThan(Integer speed){
+        Session session = getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Car> query = cb.createQuery(Car.class);
+        Root<Car> root = query.from(Car.class);
+
+        query.select(root).where(cb.lessThan(root.get("maxSpeed"), speed));
+
+        List<Car> resultList = session.createQuery(query).getResultList();
+        session.close();
+        return resultList;
+    }
+
     public void deleteCarsWithSpeedLowerThen(Integer speed) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();

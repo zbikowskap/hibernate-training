@@ -82,6 +82,12 @@ public class RelationApp {
 
         System.out.println("ALL CARS USING CRITERIA QUERRY!!");
         carRepository.getAllCarsWithCriteriaQuery().forEach(System.out::println);
+
+        System.out.println("ALL OWNERS USING CRITERIA QUERRY!!");
+        ownerRepository.getAllByName("Zenek").forEach(System.out::println);
+
+        System.out.println("ALL CARS SLOWER THAN");
+        carRepository.getCarsSlowerThan(209).forEach(System.out::println);
     }
 
     private static Sticker createSticker(Set<Car> cars, Author author, String name) {
@@ -108,14 +114,14 @@ public class RelationApp {
         Car fiatMultipla = new Car();
         fiatMultipla.setName(name);
         fiatMultipla.setBrand("fiat");
-        fiatMultipla.setMaxSpeed(200);
+        fiatMultipla.setMaxSpeed(207);
         fiatMultipla.setOwnerrrrrrrr(michal);
         return fiatMultipla;
     }
 
     private static Owner createOwner() {
         Owner michal = new Owner();
-        michal.setFirstName("Michal");
+        michal.setFirstName("Zenek");
         michal.setLastName("Michalski");
         return michal;
     }
